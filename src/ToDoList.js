@@ -17,6 +17,11 @@ const ToDoList = () => {
         setDesc({ dates: "", description: "" });
     }
 
+    const deleteButton = (event) => {
+        event.preventDefault();
+        setTodos(todos.filter((todo, index) => parseInt(event.target.id) !== index));
+    }
+
     return (
         <div>
             <h1>Simple ToDoList</h1>
@@ -36,10 +41,13 @@ const ToDoList = () => {
                         <th>Date</th>
                         <th>Description</th>
                     </tr>
-                    {todos.map(todo =>
-                        <tr>
+                    {todos.map((todo, index) =>
+                        <tr key={index}>
                             <td>{todo.dates}</td>
                             <td>{todo.description}</td>
+                            <td>
+                                <button onClick={deleteButton} id={index}>Delete</button>
+                            </td>
                         </tr>
                     )
                     }
